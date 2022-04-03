@@ -52,3 +52,9 @@ Mkfile.old
 dkms.conf
 *.user
 **/clox/x64
+**/.vs
+.vs/bytecode/v17/.suo
+*.db
+*.db-shm
+*.db-wal
+*.opendb
