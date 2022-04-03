@@ -3,6 +3,7 @@
 #include "common.h"
 #include "vm.h"
 #include "debug.h"
+#include "compiler.h"
 
 
 VM vm;
@@ -34,12 +35,10 @@ void freeVM()
 
 }
 
-InterpretResult interpret(Chunk* chunk)
+InterpretResult interpret(const char* source)
 {
-	vm.chunk = chunk;
-	vm.ip = vm.chunk->code;
-
-	return run();
+	compile(source);
+	return INTERPRET_OK;
 }
 
 static InterpretResult run()
@@ -66,7 +65,7 @@ static InterpretResult run()
 		printf("\n");
 		disassembleInstruction(vm.chunk, (int)(vm.ip - vm.chunk->code));
 #endif
-		uint8_t instruction;
+		uint8_t instruction = 0;
 
 		switch (instruction = READ_BYTE())
 		{

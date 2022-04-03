@@ -58,3 +58,7 @@ dkms.conf
 *.db-shm
 *.db-wal
 *.opendb
+clox/clox.vcxproj.filters
+clox/clox.vcxproj.filters
+clox/clox.vcxproj.filters
+*.filters
