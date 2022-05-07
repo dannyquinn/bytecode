@@ -3,34 +3,36 @@
 #include "memory.h"
 #include "value.h"
 
-void initValueArray(ValueArray* valueArray)
+void initValueArray(ValueArray* array)
 {
-	valueArray->values = NULL;
-	valueArray->capacity = 0;
-	valueArray->count = 0;
+	array->values = NULL;
+	array->count = 0;
+	array->capacity = 0;
 }
 
-void writeValueArray(ValueArray* valueArray, Value value)
+void writeValueArray(ValueArray* array, Value value)
 {
-	if (valueArray->capacity < valueArray->count + 1)
+	if (array->capacity < array->count + 1)
 	{
-		int oldCapacity = valueArray->capacity; 
-		valueArray->capacity = GROW_CAPACITY(oldCapacity);
-		valueArray->values = GROW_ARRAY(Value, valueArray->values, oldCapacity, valueArray->capacity);
+		int oldCapacity = array->capacity;
+
+		array->capacity = GROW_CAPACITY(oldCapacity);
+
+		array->values = GROW_ARRAY(Value, array->values, oldCapacity, array->capacity);
 	}
 
-	valueArray->values[valueArray->count] = value; 
-	valueArray->count++;
+	array->values[array->count] = value;
+	array->count++;
 }
 
-void freeValueArray(ValueArray* valueArray)
+void freeValueArray(ValueArray* array)
 {
-	FREE_ARRAY(Value, valueArray->values, valueArray->capacity);
-	initValueArray(valueArray);
+	FREE_ARRAY(Value, array->values, array->capacity);
+
+	initValueArray(array);
 }
 
 void printValue(Value value)
 {
 	printf("%g", value);
 }
-

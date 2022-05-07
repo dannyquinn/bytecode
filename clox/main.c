@@ -1,4 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS
+#define _CRT_SECURE_NO_WARNINGS 
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -9,13 +9,12 @@
 #include "debug.h"
 #include "vm.h"
 
-
-
 static void repl()
 {
 	char line[1024];
 
-	for (;;) {
+	for (;;)
+	{
 		printf("> ");
 
 		if (!fgets(line, sizeof(line), stdin))
@@ -30,7 +29,6 @@ static void repl()
 
 static char* readFile(const char* path)
 {
-
 	FILE* file = fopen(path, "rb");
 
 	if (file == NULL)
@@ -57,7 +55,7 @@ static char* readFile(const char* path)
 
 	if (bytesRead < fileSize)
 	{
-		fprintf(stderr, "Could not read file \"%s\".\n", path);
+		fprintf(stderr, "Could not read the file \"%s\".\n", path);
 		exit(74);
 	}
 
@@ -71,20 +69,19 @@ static char* readFile(const char* path)
 static void runFile(const char* path)
 {
 	char* source = readFile(path);
-	
+
 	InterpretResult result = interpret(source);
-	
+
 	free(source);
 
 	if (result == INTERPRET_COMPILE_ERROR) exit(65);
 	if (result == INTERPRET_RUNTIME_ERROR) exit(70);
-
 }
 
 int main(int argc, const char* argv[])
 {
 	initVM();
-	
+
 	if (argc == 1)
 	{
 		repl();
@@ -95,11 +92,11 @@ int main(int argc, const char* argv[])
 	}
 	else
 	{
-		fprintf(stderr, "Usage clox [path]\n");
+		printf(stderr, "Usage: clox [path]\n");
 		exit(64);
 	}
 	
 	freeVM();
-	
+
 	return 0;
 }
