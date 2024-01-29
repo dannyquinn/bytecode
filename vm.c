@@ -13,6 +13,7 @@ VM vm;
 
 static void resetStack() {
     vm.stackTop = vm.stack;
+    vm.objects = NULL;
 }
 
 static void runtimeError(const char* format, ...) {
@@ -33,7 +34,7 @@ void initVM() {
 }
 
 void freeVM() {
-
+    freeObjects();
 }
 
 void push(Value value) {
