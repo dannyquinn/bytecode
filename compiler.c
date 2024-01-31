@@ -332,7 +332,15 @@ static void ifStatement() {
 
     statement();
 
+    int elseJump = emitJump(OP_JUMP);
+
     patchJump(thenJump);
+    emitByte(OP_POP);
+
+    if (match(TOKEN_ELSE)) statement();
+
+    patchJump(elseJump);
+    emitByte(OP_POP);
 }
 
 static void printStatement() {
