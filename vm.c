@@ -147,6 +147,7 @@ static InterpretResult run() {
 // #define READ_CONSTANT() (frame->function->chunk.constants.values[READ_BYTE()])
 #define READ_STRING() AS_STRING(READ_CONSTANT())
 // #define READ_SHORT() (frame->ip += 2, (uint16_t)((frame->ip[-2] << 8) | frame->ip[-1]))
+#define READ_SHORT() (vm.ip +=2, (uint16_t)((vm.ip[-2] << 8) | vm.ip[-1]))
 #define BINARY_OP(valueType, op) \
     do { \
         if (!IS_NUMBER(peek(0)) || !IS_NUMBER(peek(1))) { \
@@ -267,16 +268,16 @@ static InterpretResult run() {
                 } 
                 push(NUMBER_VAL(-AS_NUMBER(pop())));
                 break;
-//             case OP_JUMP_IF_FALSE: {
-//                 uint16_t offset = READ_SHORT();
-//                 if (isFalsey(peek(0))) frame->ip += offset;
-//                 break;
-//             }
-//             case OP_JUMP: {
-//                 uint16_t offset = READ_SHORT();
-//                 frame->ip += offset;
-//                 break;
-//             }
+            case OP_JUMP_IF_FALSE: {
+                uint16_t offset = READ_SHORT();
+                if (isFalsey(peek(0))) vm.ip += offset;
+                break;
+            }
+            case OP_JUMP: {
+                uint16_t offset = READ_SHORT();
+                vm.ip += offset;
+                break;
+            }
 //             case OP_LOOP: {
 //                 uint16_t offset = READ_SHORT();
 //                 frame->ip -= offset;
@@ -309,7 +310,7 @@ static InterpretResult run() {
 
 // #undef BINARY_OP
 #undef READ_STRING
-// #undef READ_SHORT
+#undef READ_SHORT
 #undef READ_CONSTANT
 #undef READ_BYTE
 }
