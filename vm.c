@@ -278,11 +278,11 @@ static InterpretResult run() {
                 vm.ip += offset;
                 break;
             }
-//             case OP_LOOP: {
-//                 uint16_t offset = READ_SHORT();
-//                 frame->ip -= offset;
-//                 break;
-//             }
+            case OP_LOOP: {
+                uint16_t offset = READ_SHORT();
+                vm.ip -= offset;
+                break;
+            }
 //             case OP_CALL: {
 //                 int argCount = READ_BYTE();
 //                 if (!callValue(peek(argCount), argCount)) {
