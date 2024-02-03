@@ -2,28 +2,31 @@
 #define clox_vm_h
 
 #include "chunk.h"
-#include "object.h"
+// #include "object.h"
 #include "table.h"
 #include "value.h"
 
 
-#define FRAMES_MAX 64
-#define STACK_MAX (FRAMES_MAX * UINT8_COUNT)
+// #define FRAMES_MAX 64
+// #define STACK_MAX (FRAMES_MAX * UINT8_COUNT)
+#define STACK_MAX 256
+
+// typedef struct {
+//     ObjFunction* function;
+//     uint8_t* ip;
+//     Value* slots;
+// } CallFrame;
 
 typedef struct {
-    ObjFunction* function;
-    uint8_t* ip;
-    Value* slots;
-} CallFrame;
-
-typedef struct {
-    CallFrame frames[FRAMES_MAX];
-    int frameCount;
+//     CallFrame frames[FRAMES_MAX];
+    // int frameCount;
     Value stack[STACK_MAX];
     Value* stackTop;
     Table globals;
     Table strings;
     Obj* objects;
+    Chunk* chunk;
+    uint8_t* ip;
 } VM;
 
 typedef enum {
@@ -36,8 +39,10 @@ extern VM vm;
 
 void initVM();
 void freeVM();
+//InterpretResult interpret(Chunk* chunk);
 InterpretResult interpret(const char* source);
 
 void push(Value value);
 Value pop();
+
 #endif

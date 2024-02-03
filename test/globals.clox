@@ -1,0 +1,12 @@
+//
+// ./build/main.out ./test/globals.clox
+//
+
+var a = 2;
+var b = 3;
+
+b = 4;
+
+var c = a + b;
+
+print c;

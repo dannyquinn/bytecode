@@ -52,6 +52,7 @@ static char* readFile(const char* path) {
 
 static void runFile(const char* path) {
     char* source = readFile(path);
+
     InterpretResult result = interpret(source);
     free(source);
 
@@ -59,7 +60,39 @@ static void runFile(const char* path) {
     if (result == INTERPRET_RUNTIME_ERROR) exit(70);
 }
 
+// static void main_test() {
+//     initVM();
+//     Chunk chunk;
+//     initChunk(&chunk);
+
+//     int constant = addConstant(&chunk, 1.2);
+//     writeChunk(&chunk, OP_CONSTANT, 123);
+//     writeChunk(&chunk, constant, 123);
+    
+//     constant = addConstant(&chunk, 3.4);
+//     writeChunk(&chunk, OP_CONSTANT, 123);
+//     writeChunk(&chunk, constant, 123);
+
+//     writeChunk(&chunk, OP_ADD, 123);
+
+//     constant = addConstant(&chunk, 5.6);
+//     writeChunk(&chunk, OP_CONSTANT, 123);
+//     writeChunk(&chunk, constant, 123); 
+
+//     writeChunk(&chunk, OP_DIVIDE, 123);
+
+//     writeChunk(&chunk, OP_NEGATE, 123);
+    
+//     writeChunk(&chunk, OP_RETURN, 123);
+
+//     disassembleChunk(&chunk, "test chunk");
+//     interpret(&chunk);
+//     freeVM();
+//     freeChunk(&chunk);
+// }
+
 int main(int argc, const char* argv[]) {
+    //main_test();
     initVM();
     
     if (argc == 1) {
@@ -74,5 +107,5 @@ int main(int argc, const char* argv[]) {
     }
 
     freeVM();
-    return 0;
+     return 0;
 }

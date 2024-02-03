@@ -1,0 +1,7 @@
+//
+//    ./build/main.out ./test/print.clox
+//
+print 1+2;
+
+print "Hello" + " World";
+
