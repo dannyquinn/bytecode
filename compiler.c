@@ -185,7 +185,7 @@ static void initCompiler(Compiler* compiler, FunctionType type) {
     compiler->function = newFunction();
 
     current = compiler;
-    
+
     Local* local = &current->locals[current->localCount++];
     local->depth = 0;
     local->name.start = "";
@@ -480,7 +480,7 @@ static void ifStatement() {
     consume(TOKEN_RIGHT_PAREN, "Expect ')' after condition.");
 
     int thenJump = emitJump(OP_JUMP_IF_FALSE);
-
+    emitByte(OP_POP);
     statement();
 
     int elseJump = emitJump(OP_JUMP);
@@ -491,7 +491,6 @@ static void ifStatement() {
     if (match(TOKEN_ELSE)) statement();
 
     patchJump(elseJump);
-    emitByte(OP_POP);
 }
 
 static void printStatement() {

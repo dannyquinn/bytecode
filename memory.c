@@ -28,6 +28,10 @@ void freeObject(Obj* object) {
             FREE(ObjString, object);
             break;
         }
+        case OBJ_NATIVE: {
+            FREE(ObjNative, object);
+            break;
+        }
     }
 }
 
