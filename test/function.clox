@@ -1,0 +1,19 @@
+//
+// ./build/main.out ./test/function.clox
+//
+
+var a = 2;
+
+fun double(a)
+{
+    return a * 2;
+}
+
+print double(a);
+
+fun no_return() {
+    print "test";
+    return;
+}
+
+no_return();
