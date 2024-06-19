@@ -5,8 +5,13 @@
 #include "value.h"
 
 typedef enum {
+    OP_ADD,
     OP_CONSTANT,
+    OP_DIVIDE,
+    OP_MULTIPLY,
+    OP_NEGATE,
     OP_RETURN,
+    OP_SUBTRACT
 } OpCode;
 
 typedef struct {
@@ -25,4 +30,4 @@ int addConstant(Chunk* chunk, Value value);
 
 void freeChunk(Chunk* chunk);
 
-#endif 
+#endif
