@@ -18,7 +18,7 @@ void initScanner(const char* source) {
     scanner.line = 1;
 }
 
-static isAlpha(char c) {
+static bool isAlpha(char c) {
     return (c == '_' ||
         c >= 'a' && c <= 'z' || 
         c >= 'A' && c <= 'Z'
@@ -26,7 +26,7 @@ static isAlpha(char c) {
 }
 
 static bool isDigit(char c) {
-    return c >= '0' && c <=' 9';
+    return c >= '0' && c <= '9';
 }
 
 static bool isAtEnd() {
@@ -107,6 +107,7 @@ static TokenType checkKeyword(int start, int length, const char* rest, TokenType
     
     return TOKEN_IDENTIFIER;
 }
+
 static TokenType identifierType() {
     switch (scanner.start[0]) {
         case 'a': return checkKeyword(1, 2, "nd", TOKEN_AND);
